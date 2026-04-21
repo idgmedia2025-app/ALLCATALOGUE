@@ -9,7 +9,7 @@ const solutions = [
     borderColor: '#bfdffc',
     description: 'Publish technical datasheets, CAD files, tolerance specs, and compliance certificates. Buyers get instant access to the exact documentation needed for procurement decisions.',
     benefits: ['3D model & CAD file hosting', 'Compliance document management', 'RFQ integration with ERP systems', 'Multi-tier distributor access control'],
-    companies: ['Siemens', 'ABB', 'Bosch'],
+    companies: ['Automation OEMs', 'Machinery builders', 'Precision component makers'],
   },
   {
     emoji: '🚚',
@@ -19,7 +19,7 @@ const solutions = [
     borderColor: '#fdd5a8',
     description: 'Aggregate products from hundreds of manufacturers into a unified, searchable catalogue. Real-time stock levels, tiered pricing, and lead-time visibility for buyers worldwide.',
     benefits: ['Multi-manufacturer aggregation', 'Live inventory sync via API', 'Tiered pricing by buyer segment', 'Bulk RFQ management tools'],
-    companies: ['Würth', 'Grainger', 'RS Components'],
+    companies: ['MRO distributors', 'Industrial traders', 'Export–import firms'],
   },
   {
     emoji: '🛒',
@@ -29,7 +29,7 @@ const solutions = [
     borderColor: '#bbf7d0',
     description: 'Enable wholesale buyers to browse your full product range, submit bulk orders, and track shipment status — all within a branded catalogue portal.',
     benefits: ['Branded buyer portal', 'MOQ & volume pricing rules', 'Shipment tracking integration', 'Net-30/60 payment terms display'],
-    companies: ['Carrefour', 'Metro Group', 'Tesco B2B'],
+    companies: ['Wholesale chains', 'Hypermarket buyers', 'HORECA suppliers'],
   },
   {
     emoji: '💻',
@@ -39,7 +39,7 @@ const solutions = [
     borderColor: '#e9d5ff',
     description: 'Component-level technical specifications, lifecycle status, REACH/RoHS compliance, and cross-reference tables — structured for engineers and procurement teams.',
     benefits: ['Component lifecycle tracking', 'REACH/RoHS compliance flags', 'Cross-reference & alternative parts', 'BOM (Bill of Materials) integration'],
-    companies: ['Arrow Electronics', 'Avnet', 'Mouser'],
+    companies: ['Component distributors', 'Contract manufacturers', 'OEM procurement teams'],
   },
   {
     emoji: '🧪',
@@ -49,7 +49,7 @@ const solutions = [
     borderColor: '#fed7aa',
     description: 'Handle SDS sheets, CoA documents, regulatory compliance records, and GHS labels. Full audit trail for every document accessed by buyers.',
     benefits: ['SDS & CoA document management', 'GHS label generation', 'Regulatory compliance tracking', 'Full buyer access audit log'],
-    companies: ['BASF', 'Dow Chemical', 'Lonza'],
+    companies: ['Specialty chemical makers', 'API producers', 'Ingredient suppliers'],
   },
   {
     emoji: '🌿',
@@ -59,7 +59,7 @@ const solutions = [
     borderColor: '#86efac',
     description: 'Product origin, certifications (Organic, Halal, Kosher), nutrition data, and shelf life information — all linked to batch-level traceability.',
     benefits: ['Batch & lot traceability', 'Organic/Halal/Kosher certification', 'Nutritional data structured fields', 'Export documentation support'],
-    companies: ['Cargill', 'Olam International', 'LDC'],
+    companies: ['Commodity exporters', 'Agri-processors', 'Food ingredient traders'],
   },
 ]
 
@@ -107,9 +107,9 @@ export default function SolutionsPage() {
                       </li>
                     ))}
                   </ul>
-                  <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>Used by:</span>
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>Built for:</span>
                       {sol.companies.map(c => (
                         <span key={c} className="text-xs font-display font-semibold px-2 py-0.5 rounded"
                           style={{ background: 'var(--bg)', color: 'var(--navy-mid)', border: '1px solid var(--border)' }}>{c}</span>

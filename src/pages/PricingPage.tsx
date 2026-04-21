@@ -24,8 +24,8 @@ const plans = [
         { t: 'Multi-language', ok: false },
       ],
       'Support': [
-        { t: 'Cloudflare security', ok: true },
-        { t: 'Malware scanning', ok: true },
+        { t: 'Enterprise-grade security', ok: true },
+        { t: 'Automatic malware scanning', ok: true },
         { t: 'Email support', ok: true },
         { t: 'Dedicated manager', ok: false },
       ],
@@ -54,8 +54,8 @@ const plans = [
         { t: 'Multi-language', ok: true },
       ],
       'Support': [
-        { t: 'Cloudflare + Turnstile', ok: true },
-        { t: 'Malware scanning', ok: true },
+        { t: 'Advanced bot protection', ok: true },
+        { t: 'Automatic malware scanning', ok: true },
         { t: 'Priority email + chat', ok: true },
         { t: 'Dedicated manager', ok: false },
       ],
@@ -83,8 +83,8 @@ const plans = [
         { t: 'Multi-language', ok: true },
       ],
       'Support': [
-        { t: 'Cloudflare + ClamAV', ok: true },
-        { t: 'Sentry monitoring', ok: true },
+        { t: 'Deep-scan file inspection', ok: true },
+        { t: '24/7 error monitoring', ok: true },
         { t: '24/7 phone + Slack', ok: true },
         { t: 'Dedicated manager', ok: true },
       ],
@@ -98,7 +98,7 @@ const faqs = [
   { q: 'Is there a setup fee for Enterprise?', a: 'No setup fees. Enterprise pricing covers everything including onboarding, migration, and custom work.' },
   { q: 'What happens if I exceed my SKU limit?', a: 'We notify you at 90%. Your existing catalogue stays fully accessible — we never block access. Upgrade any time.' },
   { q: 'Do you offer annual billing discounts?', a: 'Yes. Annual billing saves approximately 20% compared to monthly pricing on all paid plans.' },
-  { q: 'Is my data secure and GDPR compliant?', a: 'Yes — SOC 2 Type II certified and fully GDPR compliant. Supabase EU region available with Cloudflare edge storage.' },
+  { q: 'Is my data secure and GDPR compliant?', a: 'Yes — SOC 2 Type II certified and fully GDPR compliant. EU data-residency region available with encrypted storage at rest and in transit.' },
 ]
 
 export default function PricingPage() {

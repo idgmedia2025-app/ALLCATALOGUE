@@ -2,122 +2,64 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle, ChevronRight, Star, Package, Send } from 'lucide-react'
 
 const categories = [
-  { icon: '⚡', label: 'Electronics', count: '2.4M items' },
-  { icon: '🏭', label: 'Industrial Equipment', count: '890K items' },
-  { icon: '👗', label: 'Apparel & Fashion', count: '5.1M items' },
-  { icon: '🧪', label: 'Chemicals & Pharma', count: '320K items' },
-  { icon: '🌿', label: 'Food & Beverages', count: '1.2M items' },
-  { icon: '📦', label: 'Packaging & Printing', count: '760K items' },
-  { icon: '🏋️', label: 'Sports & Entertainment', count: '430K items' },
-  { icon: '🏡', label: 'Home & Garden', count: '2.8M items' },
-  { icon: '💄', label: 'Beauty & Personal Care', count: '1.9M items' },
-  { icon: '🔩', label: 'Hardware & Tools', count: '640K items' },
+  { icon: '⚡', label: 'Electronics' },
+  { icon: '🏭', label: 'Industrial Equipment' },
+  { icon: '👗', label: 'Apparel & Fashion' },
+  { icon: '🧪', label: 'Chemicals & Pharma' },
+  { icon: '🌿', label: 'Food & Beverages' },
+  { icon: '📦', label: 'Packaging & Printing' },
+  { icon: '🏋️', label: 'Sports & Entertainment' },
+  { icon: '🏡', label: 'Home & Garden' },
+  { icon: '💄', label: 'Beauty & Personal Care' },
+  { icon: '🔩', label: 'Hardware & Tools' },
 ]
 
-const companies = [
+// Sample/demo supplier profiles — shown to illustrate how supplier listings appear on the platform.
+// Replace with real verified suppliers once onboarded.
+const sampleCompanies = [
   {
-    name: 'TechNova Systems GmbH',
+    name: 'Sample Supplier A',
     country: '🇩🇪 Germany',
     industry: 'Industrial Equipment',
-    skus: '2,400 SKUs',
-    badge: 'Verified Supplier',
-    rating: 4.9,
-    reviews: 312,
-    desc: 'Precision CNC components and industrial automation systems for aerospace and automotive.',
-    minOrder: '$500 MOQ',
-    leadTime: '7–14 days',
+    desc: 'Example profile: precision CNC components and industrial automation systems.',
   },
   {
-    name: 'PacificTrade Corporation',
+    name: 'Sample Supplier B',
     country: '🇯🇵 Japan',
     industry: 'Electronics & Components',
-    skus: '8,200 SKUs',
-    badge: 'Enterprise',
-    rating: 4.8,
-    reviews: 891,
-    desc: 'Semiconductor components and consumer electronics distributed to 60+ countries globally.',
-    minOrder: '$200 MOQ',
-    leadTime: '5–10 days',
+    desc: 'Example profile: semiconductor components and consumer electronics distribution.',
   },
   {
-    name: 'AlphaSource Materials',
+    name: 'Sample Supplier C',
     country: '🇰🇷 South Korea',
     industry: 'Raw Materials',
-    skus: '1,100 SKUs',
-    badge: 'Certified',
-    rating: 4.7,
-    reviews: 204,
-    desc: 'Premium steel alloys and composite materials for aerospace, automotive, and construction.',
-    minOrder: '$1,000 MOQ',
-    leadTime: '10–20 days',
+    desc: 'Example profile: premium steel alloys and composite materials.',
   },
   {
-    name: 'Nexbridge Trading Co.',
+    name: 'Sample Supplier D',
     country: '🇨🇳 China',
     industry: 'Packaging & Printing',
-    skus: '5,600 SKUs',
-    badge: 'Top Supplier',
-    rating: 4.9,
-    reviews: 1240,
-    desc: 'Customized packaging solutions with MOQ flexibility for global retail and e-commerce chains.',
-    minOrder: '$150 MOQ',
-    leadTime: '3–7 days',
+    desc: 'Example profile: customized packaging solutions with MOQ flexibility.',
   },
   {
-    name: 'Verde Chemicals Ltd',
+    name: 'Sample Supplier E',
     country: '🇮🇳 India',
     industry: 'Chemicals & Pharma',
-    skus: '3,800 SKUs',
-    badge: 'Certified',
-    rating: 4.6,
-    reviews: 178,
-    desc: 'ISO-certified chemical compounds and active pharmaceutical ingredients for global pharma.',
-    minOrder: '$300 MOQ',
-    leadTime: '14–21 days',
+    desc: 'Example profile: ISO-certified chemical compounds and pharmaceutical ingredients.',
   },
   {
-    name: 'OmegaFlex Tekstil',
+    name: 'Sample Supplier F',
     country: '🇹🇷 Turkey',
     industry: 'Textiles & Apparel',
-    skus: '12,000 SKUs',
-    badge: 'Verified Supplier',
-    rating: 4.8,
-    reviews: 567,
-    desc: 'Sustainable fabric solutions with digital swatches and full compliance documentation.',
-    minOrder: '$250 MOQ',
-    leadTime: '7–15 days',
-  },
-  {
-    name: 'Agrolink Exports',
-    country: '🇧🇷 Brazil',
-    industry: 'Food & Beverages',
-    skus: '890 SKUs',
-    badge: 'Organic Certified',
-    rating: 4.7,
-    reviews: 134,
-    desc: 'Certified organic food commodities, tropical fruits, and agricultural products worldwide.',
-    minOrder: '$400 MOQ',
-    leadTime: '15–30 days',
-  },
-  {
-    name: 'Luminary Tools Inc.',
-    country: '🇺🇸 United States',
-    industry: 'Hardware & Tools',
-    skus: '4,200 SKUs',
-    badge: 'Verified Supplier',
-    rating: 4.9,
-    reviews: 720,
-    desc: 'Professional-grade power tools, hand tools, and safety equipment for industrial buyers.',
-    minOrder: '$350 MOQ',
-    leadTime: '4–8 days',
+    desc: 'Example profile: sustainable fabric solutions with full compliance documentation.',
   },
 ]
 
-const stats = [
-  { icon: '👥', value: '200,000+', label: 'Verified Suppliers' },
-  { icon: '📦', value: '10M+', label: 'Products Available' },
-  { icon: '🌍', value: '220+', label: 'Countries & Regions' },
-  { icon: '🔒', value: '100%', label: 'Secure Transactions' },
+const valueProps = [
+  { icon: '✅', value: 'Verified', label: 'Supplier vetting' },
+  { icon: '📦', value: 'Rich', label: 'Product catalogues' },
+  { icon: '🌍', value: 'Global', label: 'Buyer reach' },
+  { icon: '🔒', value: 'Secure', label: 'Trading environment' },
 ]
 
 export default function HomePage() {
@@ -144,7 +86,7 @@ export default function HomePage() {
               <span style={{ color: 'var(--orange)' }}>Sourcing Partner</span>
             </h1>
             <p className="font-body text-lg mb-8 leading-relaxed animate-fade-up delay-200" style={{ color: '#94a3b8' }}>
-              Explore thousands of quality catalogues from verified companies around the world.
+              Explore quality catalogues from verified companies around the world.
               Real-time inventory, technical docs, and instant RFQ.
             </p>
             <div className="flex flex-wrap gap-4 mb-10 animate-fade-up delay-300">
@@ -172,15 +114,14 @@ export default function HomePage() {
               style={{ background: 'radial-gradient(circle, rgba(255,106,0,0.4), transparent 70%)' }} />
             <div className="relative grid grid-cols-2 gap-4 z-10">
               {[
-                { icon: '🏭', label: 'Manufacturing', num: '14K+' },
-                { icon: '⚡', label: 'Electronics', num: '8.2K+' },
-                { icon: '🧪', label: 'Chemicals', num: '3.8K+' },
-                { icon: '📦', label: 'Packaging', num: '5.6K+' },
+                { icon: '🏭', label: 'Manufacturing' },
+                { icon: '⚡', label: 'Electronics' },
+                { icon: '🧪', label: 'Chemicals' },
+                { icon: '📦', label: 'Packaging' },
               ].map(item => (
                 <div key={item.label} className="card p-5 text-center" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', transform: 'none' }}>
                   <div className="text-3xl mb-2">{item.icon}</div>
-                  <div className="font-display font-bold text-white text-sm">{item.num}</div>
-                  <div className="font-body text-xs mt-1" style={{ color: '#94a3b8' }}>{item.label}</div>
+                  <div className="font-display font-bold text-white text-sm">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -188,11 +129,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats bar */}
+      {/* Value props bar */}
       <div className="bg-white border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x" style={{ borderColor: 'var(--border)' }}>
-            {stats.map(s => (
+            {valueProps.map(s => (
               <div key={s.label} className="py-6 px-8 text-center">
                 <div className="text-2xl mb-1">{s.icon}</div>
                 <div className="font-display font-extrabold text-2xl" style={{ color: 'var(--navy)' }}>{s.value}</div>
@@ -203,7 +144,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Categories + Featured Companies */}
+      {/* Categories + Sample Companies */}
       <section className="py-14">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-[220px_1fr] gap-8">
           {/* Sidebar Categories */}
@@ -219,7 +160,7 @@ export default function HomePage() {
                       style={{ borderBottom: i < categories.length - 1 ? `1px solid var(--border)` : 'none' }}>
                       <span className="flex items-center gap-2.5">
                         <span className="text-base">{cat.icon}</span>
-                        <span className="text-sm font-body group-hover:text-orange-600 transition-colors" style={{ color: i === 0 ? 'var(--orange)' : 'var(--navy)' }}>
+                        <span className="text-sm font-body group-hover:text-orange-600 transition-colors" style={{ color: 'var(--navy)' }}>
                           {cat.label}
                         </span>
                       </span>
@@ -241,15 +182,29 @@ export default function HomePage() {
 
           {/* Main content */}
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="section-title text-2xl">Featured Companies</h2>
-              <a href="#" className="flex items-center gap-1.5 text-sm font-display font-bold hover:gap-3 transition-all" style={{ color: 'var(--orange)' }}>
-                View All <ArrowRight size={14} />
-              </a>
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <h2 className="section-title text-2xl">How Supplier Listings Look</h2>
+                <p className="text-sm font-body mt-1" style={{ color: 'var(--muted)' }}>
+                  Preview of our supplier card layout — real verified suppliers coming soon.
+                </p>
+              </div>
+              <Link to="/solutions" className="flex items-center gap-1.5 text-sm font-display font-bold hover:gap-3 transition-all" style={{ color: 'var(--orange)' }}>
+                Learn More <ArrowRight size={14} />
+              </Link>
+            </div>
+
+            {/* Demo disclosure banner */}
+            <div className="mb-6 rounded-lg px-4 py-3 flex items-center gap-3"
+              style={{ background: 'var(--orange-light)', border: '1px solid var(--orange-mid)' }}>
+              <span className="text-base">ℹ️</span>
+              <p className="text-xs font-body" style={{ color: 'var(--navy)' }}>
+                <strong>Demo profiles.</strong> The supplier cards below are illustrative examples. Verified supplier directory launches after platform onboarding.
+              </p>
             </div>
 
             <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-5">
-              {companies.map(company => (
+              {sampleCompanies.map(company => (
                 <div key={company.name} className="card p-5 group cursor-pointer">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-3">
@@ -265,7 +220,7 @@ export default function HomePage() {
                         <p className="text-xs font-body mt-0.5" style={{ color: 'var(--muted)' }}>{company.country}</p>
                       </div>
                     </div>
-                    <span className="tag-orange text-xs">{company.badge}</span>
+                    <span className="tag-orange text-xs">Demo</span>
                   </div>
 
                   {/* Industry tag */}
@@ -278,30 +233,28 @@ export default function HomePage() {
                     {company.desc}
                   </p>
 
-                  {/* Meta */}
+                  {/* Meta (illustrative) */}
                   <div className="flex items-center gap-4 mb-4 text-xs font-body" style={{ color: 'var(--muted)' }}>
                     <span className="flex items-center gap-1">
                       <Package size={12} style={{ color: 'var(--orange)' }} />
-                      {company.skus}
+                      Product catalogue
                     </span>
-                    <span>📦 {company.minOrder}</span>
-                    <span>⏱ {company.leadTime}</span>
+                    <span>📦 MOQ on request</span>
+                    <span>⏱ Lead time varies</span>
                   </div>
 
-                  {/* Rating */}
+                  {/* Rating placeholder */}
                   <div className="flex items-center gap-1.5 mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={12} fill={i < Math.floor(company.rating) ? 'var(--orange)' : 'none'}
-                        style={{ color: 'var(--orange)' }} />
+                      <Star key={i} size={12} style={{ color: '#cbd5e0' }} />
                     ))}
-                    <span className="text-xs font-display font-bold" style={{ color: 'var(--navy)' }}>{company.rating}</span>
-                    <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>({company.reviews} reviews)</span>
+                    <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>Ratings coming soon</span>
                   </div>
 
                   {/* Action */}
                   <button className="btn-primary w-full text-xs py-2.5 flex items-center justify-center gap-2">
                     <Send size={13} />
-                    Inquiry Now
+                    Preview Inquiry Flow
                   </button>
                 </div>
               ))}
@@ -323,7 +276,7 @@ export default function HomePage() {
                 Launch your global catalogue today
               </h2>
               <p className="font-body text-base" style={{ color: '#94a3b8' }}>
-                Join 200,000+ verified suppliers. No setup fees.
+                Join our growing network of verified B2B suppliers. No setup fees.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
