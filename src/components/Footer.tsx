@@ -1,86 +1,86 @@
 import { Link } from 'react-router-dom'
+import { Mail, Phone, MapPin } from 'lucide-react'
 
-const footerLinks = {
-  Product: [
-    { label: 'Solutions', path: '/solutions' },
-    { label: 'Features', path: '/features' },
-    { label: 'Pricing', path: '/pricing' },
-  ],
-  Company: [
-    { label: 'About', path: '#' },
-    { label: 'Blog', path: '#' },
-    { label: 'Careers', path: '#' },
-  ],
-  Support: [
-    { label: 'Documentation', path: '#' },
-    { label: 'Help Center', path: '#' },
-    { label: 'Contact', path: '#' },
-  ],
-  Legal: [
-    { label: 'Privacy Policy', path: '#' },
-    { label: 'Terms of Service', path: '#' },
-    { label: 'Security', path: '#' },
-  ],
+const cols = {
+  Buy: ['All Categories', 'Request for Quotation', 'Top Selling', 'New Arrivals', 'Trade Shows'],
+  Sell: ['Become a Supplier', 'Supplier Membership', 'Seller Resources', 'Trade Assurance', 'Advertise'],
+  Support: ['Help Center', 'Contact Us', 'Shipping Info', 'FAQs', 'Live Chat'],
+  Legal: ['Privacy Policy', 'Terms of Use', 'Cookie Policy', 'Security', 'GDPR'],
 }
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-white/5 bg-dark-900">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-12 mb-16">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="block mb-4">
-              <span className="text-xl font-bold font-display text-white">
-                All<span className="text-cyan-400">catalogue</span>
-              </span>
-            </Link>
-            <p className="text-sm text-slate-500 font-body leading-relaxed mb-6">
-              The B2B digital catalogue platform for enterprises that scale globally.
-            </p>
-            <div className="flex gap-3">
-              {['linkedin', 'twitter', 'youtube'].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:border-cyan-400/40 hover:bg-cyan-400/10 transition-all"
-                >
-                  <span className="material-symbols-outlined text-slate-400 text-sm">{s === 'twitter' ? 'close' : s === 'linkedin' ? 'work' : 'play_circle'}</span>
-                </a>
-              ))}
-            </div>
+    <footer style={{ background: 'var(--navy)' }}>
+      {/* Newsletter strip */}
+      <div className="border-b" style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h4 className="font-display font-bold text-white text-lg mb-1">Subscribe to our newsletter</h4>
+            <p className="text-sm font-body" style={{ color: '#94a3b8' }}>Get the latest updates, supplier listings, and trade offers.</p>
           </div>
+          <div className="flex gap-3 w-full md:w-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="input-field md:w-64"
+              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', color: 'white' }}
+            />
+            <button className="btn-primary whitespace-nowrap">Subscribe</button>
+          </div>
+        </div>
+      </div>
 
-          {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="font-display text-xs font-semibold text-white uppercase tracking-widest mb-4">
-                {category}
-              </h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.path}
-                      className="text-sm text-slate-500 hover:text-cyan-400 transition-colors font-body"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      {/* Main footer */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-14 grid grid-cols-2 md:grid-cols-5 gap-10">
+        {/* Brand */}
+        <div className="col-span-2 md:col-span-1">
+          <Link to="/" className="inline-block mb-4">
+            <span className="font-display text-2xl font-bold text-white">All</span>
+            <span className="font-display text-2xl font-bold" style={{ color: 'var(--orange)' }}>catalogue</span>
+          </Link>
+          <p className="text-sm font-body mb-6 leading-relaxed" style={{ color: '#94a3b8' }}>
+            Connecting global buyers with verified suppliers. Your trusted partner for successful business.
+          </p>
+          <div className="space-y-2">
+            {[
+              { icon: <Mail size={14} />, text: 'hello@allcatalogue.io' },
+              { icon: <Phone size={14} />, text: '+1 (800) 555-0199' },
+              { icon: <MapPin size={14} />, text: 'Global Operations' },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span style={{ color: 'var(--orange)' }}>{item.icon}</span>
+                <span className="text-xs font-body" style={{ color: '#94a3b8' }}>{item.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-600 font-body">
+        {/* Link columns */}
+        {Object.entries(cols).map(([title, links]) => (
+          <div key={title}>
+            <h5 className="font-display font-bold text-white text-sm mb-4 uppercase tracking-wider">{title}</h5>
+            <ul className="space-y-2.5">
+              {links.map(l => (
+                <li key={l}>
+                  <a href="#" className="text-sm font-body transition-colors hover:text-white" style={{ color: '#94a3b8' }}>{l}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom */}
+      <div className="border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs font-body" style={{ color: '#64748b' }}>
             © 2026 Allcatalogue. All rights reserved.
           </p>
-          <p className="text-xs text-slate-600 font-body">
-            Built with precision for global B2B.
-          </p>
+          <div className="flex gap-4">
+            {['Privacy Policy', 'Terms of Use', 'Cookie Policy'].map(l => (
+              <a key={l} href="#" className="text-xs font-body hover:text-white transition-colors" style={{ color: '#64748b' }}>{l}</a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

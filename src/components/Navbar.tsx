@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Search, ChevronDown } from 'lucide-react'
 
 const navLinks = [
   { label: 'Solutions', path: '/solutions' },
@@ -8,72 +8,113 @@ const navLinks = [
   { label: 'Pricing', path: '/pricing' },
 ]
 
+const categories = [
+  'Electronics', 'Industrial Equipment', 'Chemicals & Pharma',
+  'Textiles & Apparel', 'Food & Beverages', 'Packaging & Printing',
+]
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
 
   return (
-    <nav className="sticky top-0 w-full z-50 bg-dark-900/80 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center group-hover:bg-cyan-400/20 transition-colors">
-            <span className="text-cyan-400 text-xs font-bold font-display">AC</span>
+    <>
+      {/* Top bar */}
+      <div style={{ background: 'var(--navy)' }} className="hidden md:block">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-10 flex items-center justify-between">
+          <p className="text-xs font-body text-slate-400">
+            🌍 Worldwide B2B Catalogue Platform — 140+ Countries
+          </p>
+          <div className="flex items-center gap-6">
+            {['Help Center', 'Supplier Directory', 'Trade Shows'].map(l => (
+              <a key={l} href="#" className="text-xs text-slate-400 hover:text-white transition-colors font-body">{l}</a>
+            ))}
           </div>
-          <span className="text-xl font-bold font-display tracking-tight text-white">
-            All<span className="text-cyan-400">catalogue</span>
-          </span>
-        </Link>
-
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={location.pathname === link.path ? 'nav-link-active' : 'nav-link'}
-            >
-              {link.label}
-            </Link>
-          ))}
         </div>
+      </div>
 
-        {/* CTA buttons */}
-        <div className="hidden md:flex items-center gap-4">
-          <button className="nav-link px-4 py-2">Sign In</button>
-          <button className="btn-primary !px-5 !py-2.5 !text-xs">
-            Get Started Free
+      {/* Main nav */}
+      <nav className="sticky top-0 z-50 bg-white border-b" style={{ borderColor: 'var(--border)', boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-16 flex items-center gap-6">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0 flex items-center gap-1">
+            <span className="font-display text-xl font-bold" style={{ color: 'var(--navy)' }}>All</span>
+            <span className="font-display text-xl font-bold" style={{ color: 'var(--orange)' }}>catalogue</span>
+          </Link>
+
+          {/* Search bar */}
+          <div className="hidden md:flex flex-1 max-w-xl items-center">
+            <div className="flex w-full rounded-lg overflow-hidden border-2" style={{ borderColor: 'var(--orange)' }}>
+              <select className="px-3 text-sm font-body border-r outline-none" style={{ borderColor: 'var(--border)', background: '#f8f8f8', color: 'var(--navy)', minWidth: '130px' }}>
+                <option>All Categories</option>
+                {categories.map(c => <option key={c}>{c}</option>)}
+              </select>
+              <input
+                type="text"
+                placeholder="Search companies & catalogues..."
+                className="flex-1 px-4 text-sm font-body outline-none"
+                style={{ color: 'var(--navy)' }}
+              />
+              <button className="px-4" style={{ background: 'var(--orange)' }}>
+                <Search size={16} color="white" />
+              </button>
+            </div>
+          </div>
+
+          {/* Right actions */}
+          <div className="hidden md:flex items-center gap-5 ml-auto">
+            {navLinks.map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={location.pathname === link.path ? 'nav-link-active' : 'nav-link'}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <button className="nav-link">Sign In</button>
+            <button className="btn-primary text-sm px-5 py-2.5">
+              Sign Up Free
+            </button>
+          </div>
+
+          {/* Mobile toggle */}
+          <button className="md:hidden ml-auto" onClick={() => setMobileOpen(!mobileOpen)} style={{ color: 'var(--navy)' }}>
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-slate-400 hover:text-white transition-colors"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden glass-card border-t border-white/5 px-6 py-6 flex flex-col gap-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setMobileOpen(false)}
-              className={location.pathname === link.path ? 'nav-link-active' : 'nav-link'}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-4 border-t border-white/5 flex flex-col gap-3">
-            <button className="nav-link text-left">Sign In</button>
-            <button className="btn-primary text-center">Get Started Free</button>
+        {/* Secondary nav */}
+        <div className="hidden md:block border-t" style={{ borderColor: 'var(--border)', background: 'var(--bg)' }}>
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 h-10 flex items-center gap-8">
+            <button className="flex items-center gap-1.5 text-sm font-display font-semibold" style={{ color: 'var(--orange)' }}>
+              <span className="material-symbols-outlined text-base">grid_view</span>
+              Categories
+              <ChevronDown size={14} />
+            </button>
+            {['New Arrivals', 'Top Selling', 'Request for Quotation', 'Trade Shows'].map(l => (
+              <a key={l} href="#" className="nav-link text-sm whitespace-nowrap">{l}</a>
+            ))}
           </div>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile menu */}
+        {mobileOpen && (
+          <div className="md:hidden bg-white border-t px-6 py-5 flex flex-col gap-4" style={{ borderColor: 'var(--border)' }}>
+            <input type="text" placeholder="Search..." className="input-field" />
+            {navLinks.map(link => (
+              <Link key={link.path} to={link.path} onClick={() => setMobileOpen(false)}
+                className={location.pathname === link.path ? 'nav-link-active' : 'nav-link'}>
+                {link.label}
+              </Link>
+            ))}
+            <div className="pt-3 border-t flex flex-col gap-3" style={{ borderColor: 'var(--border)' }}>
+              <button className="btn-outline w-full">Sign In</button>
+              <button className="btn-primary w-full">Sign Up Free</button>
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
   )
 }
