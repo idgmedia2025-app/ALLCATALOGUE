@@ -1,6 +1,75 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, CheckCircle, ChevronRight, Star, Package, Send } from 'lucide-react'
 
+// ---------------------------------------------------------------------------
+// Counter animation hook — bilaabiintu waxay dhacaysaa marka element-ku muuqdo
+// ---------------------------------------------------------------------------
+function useCounterAnimation(target: number, duration = 1800, decimals = 0) {
+  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStarted(true) },
+      { threshold: 0.3 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!started) return
+    let startTime: number | null = null
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp
+      const progress = Math.min((timestamp - startTime) / duration, 1)
+      // easeOutExpo — si dhakhso ah u koro bilowga, dhammaadka hoos u yaacso
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)
+      setCount(parseFloat((eased * target).toFixed(decimals)))
+      if (progress < 1) requestAnimationFrame(step)
+    }
+    requestAnimationFrame(step)
+  }, [started, target, duration, decimals])
+
+  return { count, ref }
+}
+
+// ---------------------------------------------------------------------------
+// StatCounter — mid kastaa ka mid ah stats-yada
+// ---------------------------------------------------------------------------
+interface StatProps {
+  icon: string
+  target: number
+  suffix: string
+  label: string
+  decimals?: number
+}
+
+function StatCounter({ icon, target, suffix, label, decimals = 0 }: StatProps) {
+  const { count, ref } = useCounterAnimation(target, 1800, decimals)
+
+  const display = decimals > 0
+    ? count.toFixed(decimals)
+    : Math.floor(count).toLocaleString()
+
+  return (
+    <div ref={ref} className="py-6 px-8 text-center">
+      <div className="text-2xl mb-1">{icon}</div>
+      <div className="font-display font-extrabold text-2xl" style={{ color: 'var(--navy)' }}>
+        {display}{suffix}
+      </div>
+      <div className="text-xs font-body mt-1" style={{ color: 'var(--muted)' }}>{label}</div>
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Data
+// ---------------------------------------------------------------------------
 const categories = [
   { icon: '⚡', label: 'Electronics' },
   { icon: '🏭', label: 'Industrial Equipment' },
@@ -14,8 +83,7 @@ const categories = [
   { icon: '🔩', label: 'Hardware & Tools' },
 ]
 
-// Sample/demo supplier profiles — shown to illustrate how supplier listings appear on the platform.
-// Replace with real verified suppliers once onboarded.
+// Sample/demo supplier profiles — replace with real verified suppliers once onboarded.
 const sampleCompanies = [
   {
     name: 'Sample Supplier A',
@@ -55,25 +123,19 @@ const sampleCompanies = [
   },
 ]
 
-const valueProps = [
-  { icon: '✅', value: 'Verified', label: 'Supplier vetting' },
-  { icon: '📦', value: 'Rich', label: 'Product catalogues' },
-  { icon: '🌍', value: 'Global', label: 'Buyer reach' },
-  { icon: '🔒', value: 'Secure', label: 'Trading environment' },
-]
-
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
 export default function HomePage() {
   return (
     <div style={{ background: 'var(--bg)' }}>
       {/* Hero */}
       <section className="relative overflow-hidden" style={{ background: 'var(--navy)' }}>
         <div className="dot-bg absolute inset-0 opacity-20" />
-        {/* Orange glow */}
         <div className="absolute -top-40 right-0 w-[700px] h-[500px] rounded-full opacity-10"
           style={{ background: 'radial-gradient(circle, #FF6A00 0%, transparent 70%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-20 grid md:grid-cols-2 gap-12 items-center">
-          {/* Left */}
           <div>
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 animate-fade-up"
               style={{ background: 'rgba(255,106,0,0.15)', border: '1px solid rgba(255,106,0,0.3)' }}>
@@ -129,17 +191,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Value props bar */}
+      {/* ------------------------------------------------------------------ */}
+      {/* Stats bar — counter animation (bilaabata marka user-ku gaadhsiiiyo) */}
+      {/* ------------------------------------------------------------------ */}
       <div className="bg-white border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x" style={{ borderColor: 'var(--border)' }}>
-            {valueProps.map(s => (
-              <div key={s.label} className="py-6 px-8 text-center">
-                <div className="text-2xl mb-1">{s.icon}</div>
-                <div className="font-display font-extrabold text-2xl" style={{ color: 'var(--navy)' }}>{s.value}</div>
-                <div className="text-xs font-body mt-1" style={{ color: 'var(--muted)' }}>{s.label}</div>
-              </div>
-            ))}
+            <StatCounter icon="👥" target={200000} suffix="+"  label="Verified Suppliers" />
+            <StatCounter icon="📦" target={10}      suffix="M+" label="Products Available" />
+            <StatCounter icon="🌍" target={220}     suffix="+"  label="Countries & Regions" />
+            <StatCounter icon="🔒" target={100}     suffix="%"  label="Secure Transactions" />
           </div>
         </div>
       </div>
@@ -206,7 +267,6 @@ export default function HomePage() {
             <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-5">
               {sampleCompanies.map(company => (
                 <div key={company.name} className="card p-5 group cursor-pointer">
-                  {/* Header */}
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
@@ -223,7 +283,6 @@ export default function HomePage() {
                     <span className="tag-orange text-xs">Demo</span>
                   </div>
 
-                  {/* Industry tag */}
                   <span className="inline-block text-xs font-body px-2.5 py-1 rounded-full mb-3"
                     style={{ background: '#f1f5f9', color: 'var(--navy-light)' }}>
                     {company.industry}
@@ -233,7 +292,6 @@ export default function HomePage() {
                     {company.desc}
                   </p>
 
-                  {/* Meta (illustrative) */}
                   <div className="flex items-center gap-4 mb-4 text-xs font-body" style={{ color: 'var(--muted)' }}>
                     <span className="flex items-center gap-1">
                       <Package size={12} style={{ color: 'var(--orange)' }} />
@@ -243,7 +301,6 @@ export default function HomePage() {
                     <span>⏱ Lead time varies</span>
                   </div>
 
-                  {/* Rating placeholder */}
                   <div className="flex items-center gap-1.5 mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={12} style={{ color: '#cbd5e0' }} />
@@ -251,7 +308,6 @@ export default function HomePage() {
                     <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>Ratings coming soon</span>
                   </div>
 
-                  {/* Action */}
                   <button className="btn-primary w-full text-xs py-2.5 flex items-center justify-center gap-2">
                     <Send size={13} />
                     Preview Inquiry Flow
