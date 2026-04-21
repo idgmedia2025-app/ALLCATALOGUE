@@ -4,125 +4,188 @@
 
 @layer base {
   :root {
-    --cyan: #00f4fe;
-    --cyan-dim: #00dce5;
-    --bg-deep: #0a0a1a;
-    --bg-surface: #0e0e1f;
-    --bg-card: rgba(17, 17, 38, 0.6);
-    --border: rgba(255, 255, 255, 0.08);
+    --orange: #FF6A00;
+    --orange-dark: #e55e00;
+    --orange-light: #fff3eb;
+    --orange-mid: #ffd5b8;
+    --navy: #1A202C;
+    --navy-mid: #2d3748;
+    --navy-light: #4a5568;
+    --bg: #F9FAFB;
+    --white: #ffffff;
+    --border: #e8edf2;
+    --muted: #718096;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 6px 20px rgba(0,0,0,0.04);
+    --shadow-hover: 0 4px 12px rgba(255,106,0,0.15), 0 16px 40px rgba(0,0,0,0.08);
   }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    background-color: #0a0a1a;
-    color: #e5e1e3;
-    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
-
-  ::selection {
-    background: rgba(0, 244, 254, 0.25);
-    color: #fff;
-  }
-
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a0a1a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(0, 244, 254, 0.3);
-    border-radius: 3px;
-  }
+  ::selection { background: rgba(255,106,0,0.12); color: var(--navy); }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(255,106,0,0.35); border-radius: 4px; }
 }
 
 @layer components {
-  .glass-card {
-    background: rgba(17, 17, 38, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .cyan-glow {
-    box-shadow: 0 0 30px rgba(0, 244, 254, 0.25);
-  }
-
-  .cyan-glow-sm {
-    box-shadow: 0 0 15px rgba(0, 244, 254, 0.15);
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, #ffffff 0%, #00f4fe 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
   .btn-primary {
-    @apply bg-cyan-400 text-dark-900 font-display font-bold px-8 py-4 rounded-lg 
-           hover:bg-cyan-500 transition-all duration-200 active:scale-95 
-           hover:shadow-[0_0_30px_rgba(0,244,254,0.4)] text-sm tracking-wide;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    background: var(--orange-dark);
+    box-shadow: 0 6px 20px rgba(255,106,0,0.35);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--navy);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 11px 24px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+    background: var(--orange-light);
   }
 
-  .btn-ghost {
-    @apply glass-card text-white font-display font-semibold px-8 py-4 rounded-lg 
-           hover:bg-white/10 transition-all duration-200 active:scale-95 text-sm tracking-wide;
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s ease;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+    border-color: rgba(255,106,0,0.2);
   }
 
   .section-label {
-    @apply font-display text-xs font-semibold text-cyan-400 uppercase tracking-widest mb-3 block;
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 10px;
   }
-
   .section-title {
-    @apply font-display text-4xl md:text-5xl font-bold text-white leading-tight;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--navy);
+    letter-spacing: -0.02em;
   }
-
-  .section-subtitle {
-    @apply font-body text-lg text-slate-400 leading-relaxed;
+  .section-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
   }
 
   .nav-link {
-    @apply font-display text-sm font-medium text-slate-400 hover:text-cyan-400 
-           transition-colors duration-200 tracking-wide;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy-light);
+    transition: color 0.15s;
+    text-decoration: none;
+  }
+  .nav-link:hover { color: var(--orange); }
+  .nav-link-active {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--orange);
+    text-decoration: none;
   }
 
-  .nav-link-active {
-    @apply font-display text-sm font-medium text-cyan-400 tracking-wide 
-           border-b border-cyan-400 pb-0.5;
+  .tag-orange {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: var(--orange-light);
+    color: var(--orange);
+    border: 1px solid var(--orange-mid);
   }
 
   .input-field {
-    @apply w-full bg-dark-900/60 border border-white/10 rounded-lg px-4 py-3 
-           text-white placeholder-slate-600 
-           focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 
-           transition-all duration-200 font-body text-sm;
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--navy);
+    outline: none;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .input-field::placeholder { color: #b0bec5; }
+  .input-field:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(255,106,0,0.1);
   }
 
-  .grid-bg {
-    background-image: 
-      linear-gradient(rgba(0, 244, 254, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 244, 254, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+  .dot-bg {
+    background-image: radial-gradient(circle, #dde3ea 1px, transparent 1px);
+    background-size: 22px 22px;
   }
+
+  .text-orange { color: var(--orange) !important; }
+  .bg-orange { background: var(--orange) !important; }
+  .bg-navy { background: var(--navy) !important; }
+  .border-orange { border-color: var(--orange) !important; }
 }
 
 @layer utilities {
-  .animate-delay-100 { animation-delay: 100ms; }
-  .animate-delay-200 { animation-delay: 200ms; }
-  .animate-delay-300 { animation-delay: 300ms; }
-  .animate-delay-400 { animation-delay: 400ms; }
+  .font-display { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+  .font-body { font-family: 'DM Sans', sans-serif !important; }
 
-  .bg-radial-cyan {
-    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 244, 254, 0.12), transparent);
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
+  .animate-fade-up { animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) forwards; opacity: 0; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
 }
