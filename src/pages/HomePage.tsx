@@ -83,43 +83,81 @@ const categories = [
   { icon: '🔩', label: 'Hardware & Tools' },
 ]
 
-// Sample/demo supplier profiles — replace with real verified suppliers once onboarded.
+// TODO: Replace each entry below with real verified supplier data once onboarded.
+// All fields (name, country, industry, skus, badge, rating, reviews, desc, minOrder, leadTime)
+// should come from your Supabase `suppliers` table via API call.
 const sampleCompanies = [
   {
     name: 'Sample Supplier A',
     country: '🇩🇪 Germany',
     industry: 'Industrial Equipment',
-    desc: 'Example profile: precision CNC components and industrial automation systems.',
+    skus: '— SKUs',
+    badge: 'Verified Supplier',
+    rating: 0,
+    reviews: 0,
+    desc: 'Placeholder — replace with real supplier description once onboarded.',
+    minOrder: '—',
+    leadTime: '—',
   },
   {
     name: 'Sample Supplier B',
     country: '🇯🇵 Japan',
     industry: 'Electronics & Components',
-    desc: 'Example profile: semiconductor components and consumer electronics distribution.',
+    skus: '— SKUs',
+    badge: 'Verified Supplier',
+    rating: 0,
+    reviews: 0,
+    desc: 'Placeholder — replace with real supplier description once onboarded.',
+    minOrder: '—',
+    leadTime: '—',
   },
   {
     name: 'Sample Supplier C',
     country: '🇰🇷 South Korea',
     industry: 'Raw Materials',
-    desc: 'Example profile: premium steel alloys and composite materials.',
+    skus: '— SKUs',
+    badge: 'Verified Supplier',
+    rating: 0,
+    reviews: 0,
+    desc: 'Placeholder — replace with real supplier description once onboarded.',
+    minOrder: '—',
+    leadTime: '—',
   },
   {
     name: 'Sample Supplier D',
     country: '🇨🇳 China',
     industry: 'Packaging & Printing',
-    desc: 'Example profile: customized packaging solutions with MOQ flexibility.',
+    skus: '— SKUs',
+    badge: 'Verified Supplier',
+    rating: 0,
+    reviews: 0,
+    desc: 'Placeholder — replace with real supplier description once onboarded.',
+    minOrder: '—',
+    leadTime: '—',
   },
   {
     name: 'Sample Supplier E',
     country: '🇮🇳 India',
     industry: 'Chemicals & Pharma',
-    desc: 'Example profile: ISO-certified chemical compounds and pharmaceutical ingredients.',
+    skus: '— SKUs',
+    badge: 'Verified Supplier',
+    rating: 0,
+    reviews: 0,
+    desc: 'Placeholder — replace with real supplier description once onboarded.',
+    minOrder: '—',
+    leadTime: '—',
   },
   {
     name: 'Sample Supplier F',
     country: '🇹🇷 Turkey',
     industry: 'Textiles & Apparel',
-    desc: 'Example profile: sustainable fabric solutions with full compliance documentation.',
+    skus: '— SKUs',
+    badge: 'Verified Supplier',
+    rating: 0,
+    reviews: 0,
+    desc: 'Placeholder — replace with real supplier description once onboarded.',
+    minOrder: '—',
+    leadTime: '—',
   },
 ]
 
@@ -243,30 +281,26 @@ export default function HomePage() {
 
           {/* Main content */}
           <div>
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <h2 className="section-title text-2xl">How Supplier Listings Look</h2>
-                <p className="text-sm font-body mt-1" style={{ color: 'var(--muted)' }}>
-                  Preview of our supplier card layout — real verified suppliers coming soon.
-                </p>
-              </div>
-              <Link to="/solutions" className="flex items-center gap-1.5 text-sm font-display font-bold hover:gap-3 transition-all" style={{ color: 'var(--orange)' }}>
-                Learn More <ArrowRight size={14} />
-              </Link>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="section-title text-2xl">Featured Companies</h2>
+              <a href="#" className="flex items-center gap-1.5 text-sm font-display font-bold hover:gap-3 transition-all" style={{ color: 'var(--orange)' }}>
+                View All <ArrowRight size={14} />
+              </a>
             </div>
 
-            {/* Demo disclosure banner */}
-            <div className="mb-6 rounded-lg px-4 py-3 flex items-center gap-3"
+            {/* TODO: Remove this banner once real suppliers are onboarded */}
+            <div className="mb-5 rounded-lg px-4 py-2.5 flex items-center gap-2.5"
               style={{ background: 'var(--orange-light)', border: '1px solid var(--orange-mid)' }}>
-              <span className="text-base">ℹ️</span>
+              <span className="text-sm">ℹ️</span>
               <p className="text-xs font-body" style={{ color: 'var(--navy)' }}>
-                <strong>Demo profiles.</strong> The supplier cards below are illustrative examples. Verified supplier directory launches after platform onboarding.
+                <strong>Sample profiles.</strong> Replace with real verified supplier data once onboarded.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-5">
               {sampleCompanies.map(company => (
                 <div key={company.name} className="card p-5 group cursor-pointer">
+                  {/* Header */}
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
@@ -280,9 +314,10 @@ export default function HomePage() {
                         <p className="text-xs font-body mt-0.5" style={{ color: 'var(--muted)' }}>{company.country}</p>
                       </div>
                     </div>
-                    <span className="tag-orange text-xs">Demo</span>
+                    <span className="tag-orange text-xs">{company.badge}</span>
                   </div>
 
+                  {/* Industry */}
                   <span className="inline-block text-xs font-body px-2.5 py-1 rounded-full mb-3"
                     style={{ background: '#f1f5f9', color: 'var(--navy-light)' }}>
                     {company.industry}
@@ -292,25 +327,36 @@ export default function HomePage() {
                     {company.desc}
                   </p>
 
+                  {/* Meta */}
                   <div className="flex items-center gap-4 mb-4 text-xs font-body" style={{ color: 'var(--muted)' }}>
                     <span className="flex items-center gap-1">
                       <Package size={12} style={{ color: 'var(--orange)' }} />
-                      Product catalogue
+                      {company.skus}
                     </span>
-                    <span>📦 MOQ on request</span>
-                    <span>⏱ Lead time varies</span>
+                    <span>📦 {company.minOrder}</span>
+                    <span>⏱ {company.leadTime}</span>
                   </div>
 
+                  {/* Rating */}
                   <div className="flex items-center gap-1.5 mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={12} style={{ color: '#cbd5e0' }} />
+                      <Star key={i} size={12}
+                        fill={company.rating > 0 && i < Math.floor(company.rating) ? 'var(--orange)' : 'none'}
+                        style={{ color: company.rating > 0 ? 'var(--orange)' : '#cbd5e0' }} />
                     ))}
-                    <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>Ratings coming soon</span>
+                    {company.rating > 0
+                      ? <>
+                          <span className="text-xs font-display font-bold" style={{ color: 'var(--navy)' }}>{company.rating}</span>
+                          <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>({company.reviews} reviews)</span>
+                        </>
+                      : <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>No reviews yet</span>
+                    }
                   </div>
 
+                  {/* Action */}
                   <button className="btn-primary w-full text-xs py-2.5 flex items-center justify-center gap-2">
                     <Send size={13} />
-                    Preview Inquiry Flow
+                    Inquiry Now
                   </button>
                 </div>
               ))}
