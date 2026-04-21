@@ -43,9 +43,9 @@ export default function Footer() {
           </p>
           <div className="space-y-2">
             {[
-              { icon: <Mail size={14} />, text: 'hello@allcatalogue.io' },
-              { icon: <Phone size={14} />, text: '+1 (800) 555-0199' },
-              { icon: <MapPin size={14} />, text: 'Global Operations' },
+              { icon: <Mail size={14} />, text: 'contact@allcatalogue.io' },
+              { icon: <Phone size={14} />, text: 'Contact form available' },
+              { icon: <MapPin size={14} />, text: 'East Africa — serving globally' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2">
                 <span style={{ color: 'var(--orange)' }}>{item.icon}</span>
