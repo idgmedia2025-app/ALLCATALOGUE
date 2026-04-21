@@ -1,167 +1,125 @@
-import { ArrowRight, Factory, Truck, ShoppingBag, Cpu, FlaskConical, Leaf } from 'lucide-react'
+import { ArrowRight, CheckCircle } from 'lucide-react'
 
 const solutions = [
   {
-    icon: <Factory size={28} />,
+    emoji: '🏭',
     title: 'Industrial Manufacturing',
     tagline: 'From factory floor to global buyer',
-    description:
-      'Publish technical datasheets, CAD files, tolerance specs, and compliance certifications. Buyers get instant access to the exact documentation needed for procurement decisions.',
-    benefits: [
-      '3D model & CAD file hosting',
-      'Compliance document management',
-      'RFQ integration with ERP systems',
-      'Multi-tier distributor access control',
-    ],
+    color: '#e8f4fd',
+    borderColor: '#bfdffc',
+    description: 'Publish technical datasheets, CAD files, tolerance specs, and compliance certificates. Buyers get instant access to the exact documentation needed for procurement decisions.',
+    benefits: ['3D model & CAD file hosting', 'Compliance document management', 'RFQ integration with ERP systems', 'Multi-tier distributor access control'],
     companies: ['Siemens', 'ABB', 'Bosch'],
-    color: 'from-blue-500/10 to-cyan-400/10',
   },
   {
-    icon: <Truck size={28} />,
+    emoji: '🚚',
     title: 'Trading & Distribution',
     tagline: 'Multi-supplier, one catalogue',
-    description:
-      'Aggregate products from hundreds of manufacturers into a unified, searchable catalogue. Real-time stock levels, tiered pricing, and lead-time visibility for buyers worldwide.',
-    benefits: [
-      'Multi-manufacturer product aggregation',
-      'Live inventory sync via API',
-      'Tiered pricing by buyer segment',
-      'Bulk RFQ management tools',
-    ],
+    color: '#fef3e8',
+    borderColor: '#fdd5a8',
+    description: 'Aggregate products from hundreds of manufacturers into a unified, searchable catalogue. Real-time stock levels, tiered pricing, and lead-time visibility for buyers worldwide.',
+    benefits: ['Multi-manufacturer aggregation', 'Live inventory sync via API', 'Tiered pricing by buyer segment', 'Bulk RFQ management tools'],
     companies: ['Würth', 'Grainger', 'RS Components'],
-    color: 'from-purple-500/10 to-blue-500/10',
   },
   {
-    icon: <ShoppingBag size={28} />,
+    emoji: '🛒',
     title: 'Wholesale & Retail',
     tagline: 'B2B buying at scale',
-    description:
-      'Enable wholesale buyers to browse your full product range, submit bulk orders, and track shipment status — all within a branded catalogue portal.',
-    benefits: [
-      'Branded buyer portal',
-      'MOQ & volume pricing rules',
-      'Shipment tracking integration',
-      'Net-30/60 payment terms display',
-    ],
+    color: '#f0fdf4',
+    borderColor: '#bbf7d0',
+    description: 'Enable wholesale buyers to browse your full product range, submit bulk orders, and track shipment status — all within a branded catalogue portal.',
+    benefits: ['Branded buyer portal', 'MOQ & volume pricing rules', 'Shipment tracking integration', 'Net-30/60 payment terms display'],
     companies: ['Carrefour', 'Metro Group', 'Tesco B2B'],
-    color: 'from-orange-500/10 to-red-500/10',
   },
   {
-    icon: <Cpu size={28} />,
+    emoji: '💻',
     title: 'Electronics & Tech',
-    tagline: 'Specs that buyers trust',
-    description:
-      'Component-level technical specifications, lifecycle status, REACH/RoHS compliance, and cross-reference tables — structured for engineers and procurement teams.',
-    benefits: [
-      'Component lifecycle tracking',
-      'REACH/RoHS compliance flags',
-      'Cross-reference & alternative parts',
-      'BOM (Bill of Materials) integration',
-    ],
+    tagline: 'Specs that engineers trust',
+    color: '#fdf4ff',
+    borderColor: '#e9d5ff',
+    description: 'Component-level technical specifications, lifecycle status, REACH/RoHS compliance, and cross-reference tables — structured for engineers and procurement teams.',
+    benefits: ['Component lifecycle tracking', 'REACH/RoHS compliance flags', 'Cross-reference & alternative parts', 'BOM (Bill of Materials) integration'],
     companies: ['Arrow Electronics', 'Avnet', 'Mouser'],
-    color: 'from-cyan-400/10 to-teal-500/10',
   },
   {
-    icon: <FlaskConical size={28} />,
+    emoji: '🧪',
     title: 'Chemicals & Pharma',
     tagline: 'Regulated industries, simplified',
-    description:
-      'Handle SDS sheets, CoA documents, regulatory compliance records, and GHS labels. Full audit trail for every document accessed by buyers.',
-    benefits: [
-      'SDS & CoA document management',
-      'GHS label generation',
-      'Regulatory compliance tracking',
-      'Full buyer access audit log',
-    ],
+    color: '#fff7ed',
+    borderColor: '#fed7aa',
+    description: 'Handle SDS sheets, CoA documents, regulatory compliance records, and GHS labels. Full audit trail for every document accessed by buyers.',
+    benefits: ['SDS & CoA document management', 'GHS label generation', 'Regulatory compliance tracking', 'Full buyer access audit log'],
     companies: ['BASF', 'Dow Chemical', 'Lonza'],
-    color: 'from-green-500/10 to-emerald-400/10',
   },
   {
-    icon: <Leaf size={28} />,
+    emoji: '🌿',
     title: 'Food & Agriculture',
     tagline: 'Traceability from farm to buyer',
-    description:
-      'Product origin, certifications (Organic, Halal, Kosher), nutrition data, and shelf life information — all linked to batch-level traceability.',
-    benefits: [
-      'Batch & lot traceability',
-      'Organic/Halal/Kosher certification display',
-      'Nutritional data structured fields',
-      'Export documentation support',
-    ],
+    color: '#f0fdf4',
+    borderColor: '#86efac',
+    description: 'Product origin, certifications (Organic, Halal, Kosher), nutrition data, and shelf life information — all linked to batch-level traceability.',
+    benefits: ['Batch & lot traceability', 'Organic/Halal/Kosher certification', 'Nutritional data structured fields', 'Export documentation support'],
     companies: ['Cargill', 'Olam International', 'LDC'],
-    color: 'from-lime-500/10 to-green-500/10',
   },
 ]
 
 export default function SolutionsPage() {
   return (
-    <>
+    <div style={{ background: 'var(--bg)' }}>
       {/* Hero */}
-      <section className="relative py-28 grid-bg overflow-hidden">
-        <div className="absolute inset-0 bg-radial-cyan pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative">
-          <div className="max-w-3xl">
-            <span className="section-label">Solutions</span>
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
-              Every industry.<br />
-              <span className="text-gradient">One platform.</span>
-            </h1>
-            <p className="section-subtitle max-w-xl">
-              Whether you manufacture, distribute, or trade — Allcatalogue adapts to the 
-              data standards and workflows of your sector.
-            </p>
-          </div>
+      <section className="relative py-20 overflow-hidden" style={{ background: 'var(--navy)' }}>
+        <div className="dot-bg absolute inset-0 opacity-20" />
+        <div className="absolute -top-20 right-10 w-96 h-96 rounded-full opacity-10"
+          style={{ background: 'radial-gradient(circle, #FF6A00, transparent 70%)' }} />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
+          <span className="section-label">Solutions</span>
+          <h1 className="font-display text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+            Every industry.<br />
+            <span style={{ color: 'var(--orange)' }}>One platform.</span>
+          </h1>
+          <p className="font-body text-lg max-w-xl leading-relaxed" style={{ color: '#94a3b8' }}>
+            Whether you manufacture, distribute, or trade — Allcatalogue adapts to the data standards and workflows of your sector.
+          </p>
         </div>
       </section>
 
       {/* Solutions grid */}
-      <section className="py-20 max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section className="py-16 max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid md:grid-cols-2 gap-6">
           {solutions.map((sol) => (
-            <div
-              key={sol.title}
-              className="glass-card rounded-2xl p-8 hover:border-cyan-400/20 transition-all duration-300 group"
-            >
-              {/* Top */}
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${sol.color} flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform`}>
-                {sol.icon}
-              </div>
-
-              <div className="mb-2">
-                <span className="text-xs font-display font-semibold text-slate-500 uppercase tracking-widest">
-                  {sol.tagline}
-                </span>
-              </div>
-              <h3 className="font-display text-2xl font-bold text-white mb-4">{sol.title}</h3>
-              <p className="text-slate-400 font-body text-sm leading-relaxed mb-6">
-                {sol.description}
-              </p>
-
-              {/* Benefits */}
-              <ul className="space-y-2 mb-6">
-                {sol.benefits.map((b) => (
-                  <li key={b} className="flex items-center gap-2.5 text-sm font-body text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Used by */}
-              <div className="pt-5 border-t border-white/5 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-600 font-body">Used by:</span>
-                  <div className="flex gap-2">
-                    {sol.companies.map((c) => (
-                      <span key={c} className="text-xs font-display font-semibold text-slate-400 bg-white/5 px-2 py-0.5 rounded">
-                        {c}
-                      </span>
+            <div key={sol.title} className="card p-7 group">
+              <div className="flex items-start gap-5">
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
+                  style={{ background: sol.color, border: `1px solid ${sol.borderColor}` }}>
+                  {sol.emoji}
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-display font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--orange)' }}>
+                    {sol.tagline}
+                  </p>
+                  <h3 className="font-display text-xl font-bold mb-3" style={{ color: 'var(--navy)' }}>{sol.title}</h3>
+                  <p className="font-body text-sm leading-relaxed mb-5" style={{ color: 'var(--muted)' }}>{sol.description}</p>
+                  <ul className="grid grid-cols-2 gap-2 mb-5">
+                    {sol.benefits.map(b => (
+                      <li key={b} className="flex items-start gap-2 text-xs font-body" style={{ color: 'var(--navy-mid)' }}>
+                        <CheckCircle size={13} className="flex-shrink-0 mt-0.5" style={{ color: 'var(--orange)' }} />
+                        {b}
+                      </li>
                     ))}
+                  </ul>
+                  <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>Used by:</span>
+                      {sol.companies.map(c => (
+                        <span key={c} className="text-xs font-display font-semibold px-2 py-0.5 rounded"
+                          style={{ background: 'var(--bg)', color: 'var(--navy-mid)', border: '1px solid var(--border)' }}>{c}</span>
+                      ))}
+                    </div>
+                    <button className="flex items-center gap-1 text-xs font-display font-bold group-hover:gap-2 transition-all" style={{ color: 'var(--orange)' }}>
+                      Learn more <ArrowRight size={12} />
+                    </button>
                   </div>
                 </div>
-                <button className="flex items-center gap-1 text-xs font-display font-semibold text-cyan-400 hover:gap-2 transition-all">
-                  Learn more <ArrowRight size={12} />
-                </button>
               </div>
             </div>
           ))}
@@ -169,19 +127,19 @@ export default function SolutionsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto glass-card rounded-3xl p-12 text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-          <span className="section-label">Custom Solutions</span>
-          <h2 className="section-title mb-4">Don't see your industry?</h2>
-          <p className="section-subtitle max-w-xl mx-auto mb-8">
-            Our engineering team can build custom integrations and workflows for your specific sector needs.
-          </p>
-          <button className="btn-primary flex items-center gap-2 mx-auto">
-            Talk to an Expert <ArrowRight size={16} />
-          </button>
+      <section className="pb-20 px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto rounded-2xl p-12 text-center relative overflow-hidden" style={{ background: 'var(--navy)' }}>
+          <div className="dot-bg absolute inset-0 opacity-20" />
+          <div className="relative">
+            <span className="section-label">Custom Solutions</span>
+            <h2 className="font-display text-3xl font-extrabold text-white mb-3">Don't see your industry?</h2>
+            <p className="font-body text-base mb-8" style={{ color: '#94a3b8' }}>
+              Our engineering team builds custom integrations for your sector.
+            </p>
+            <button className="btn-primary px-8 py-4">Talk to an Expert <ArrowRight size={15} /></button>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

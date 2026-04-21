@@ -1,122 +1,186 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, CheckCircle, Globe, Shield, Zap, ChevronRight } from 'lucide-react'
+import { ArrowRight, CheckCircle, ChevronRight, Star, Package, Send } from 'lucide-react'
+
+const categories = [
+  { icon: '⚡', label: 'Electronics', count: '2.4M items' },
+  { icon: '🏭', label: 'Industrial Equipment', count: '890K items' },
+  { icon: '👗', label: 'Apparel & Fashion', count: '5.1M items' },
+  { icon: '🧪', label: 'Chemicals & Pharma', count: '320K items' },
+  { icon: '🌿', label: 'Food & Beverages', count: '1.2M items' },
+  { icon: '📦', label: 'Packaging & Printing', count: '760K items' },
+  { icon: '🏋️', label: 'Sports & Entertainment', count: '430K items' },
+  { icon: '🏡', label: 'Home & Garden', count: '2.8M items' },
+  { icon: '💄', label: 'Beauty & Personal Care', count: '1.9M items' },
+  { icon: '🔩', label: 'Hardware & Tools', count: '640K items' },
+]
 
 const companies = [
   {
-    name: 'TechNova Systems',
+    name: 'TechNova Systems GmbH',
+    country: '🇩🇪 Germany',
     industry: 'Industrial Equipment',
-    country: 'Germany',
-    flag: '🇩🇪',
-    products: '2,400+ SKUs',
-    badge: 'Verified',
-    description: 'Leading manufacturer of precision CNC components and industrial automation systems.',
+    skus: '2,400 SKUs',
+    badge: 'Verified Supplier',
+    rating: 4.9,
+    reviews: 312,
+    desc: 'Precision CNC components and industrial automation systems for aerospace and automotive.',
+    minOrder: '$500 MOQ',
+    leadTime: '7–14 days',
   },
   {
-    name: 'PacificTrade Corp',
+    name: 'PacificTrade Corporation',
+    country: '🇯🇵 Japan',
     industry: 'Electronics & Components',
-    country: 'Japan',
-    flag: '🇯🇵',
-    products: '8,200+ SKUs',
+    skus: '8,200 SKUs',
     badge: 'Enterprise',
-    description: 'Distributing semiconductor components and consumer electronics to 60+ countries.',
+    rating: 4.8,
+    reviews: 891,
+    desc: 'Semiconductor components and consumer electronics distributed to 60+ countries globally.',
+    minOrder: '$200 MOQ',
+    leadTime: '5–10 days',
   },
   {
-    name: 'AlphaSource Ltd',
+    name: 'AlphaSource Materials',
+    country: '🇰🇷 South Korea',
     industry: 'Raw Materials',
-    country: 'South Korea',
-    flag: '🇰🇷',
-    products: '1,100+ SKUs',
-    badge: 'Verified',
-    description: 'Premium steel alloys and composite materials for aerospace and automotive sectors.',
-  },
-  {
-    name: 'Nexbridge Trading',
-    industry: 'Packaging & Printing',
-    country: 'China',
-    flag: '🇨🇳',
-    products: '5,600+ SKUs',
-    badge: 'Top Supplier',
-    description: 'Customized packaging solutions with MOQ flexibility for global retail chains.',
-  },
-  {
-    name: 'Verde Chemicals',
-    industry: 'Chemicals & Pharma',
-    country: 'India',
-    flag: '🇮🇳',
-    products: '3,800+ SKUs',
+    skus: '1,100 SKUs',
     badge: 'Certified',
-    description: 'ISO-certified chemical compounds and active pharmaceutical ingredients.',
+    rating: 4.7,
+    reviews: 204,
+    desc: 'Premium steel alloys and composite materials for aerospace, automotive, and construction.',
+    minOrder: '$1,000 MOQ',
+    leadTime: '10–20 days',
   },
   {
-    name: 'OmegaFlex GmbH',
+    name: 'Nexbridge Trading Co.',
+    country: '🇨🇳 China',
+    industry: 'Packaging & Printing',
+    skus: '5,600 SKUs',
+    badge: 'Top Supplier',
+    rating: 4.9,
+    reviews: 1240,
+    desc: 'Customized packaging solutions with MOQ flexibility for global retail and e-commerce chains.',
+    minOrder: '$150 MOQ',
+    leadTime: '3–7 days',
+  },
+  {
+    name: 'Verde Chemicals Ltd',
+    country: '🇮🇳 India',
+    industry: 'Chemicals & Pharma',
+    skus: '3,800 SKUs',
+    badge: 'Certified',
+    rating: 4.6,
+    reviews: 178,
+    desc: 'ISO-certified chemical compounds and active pharmaceutical ingredients for global pharma.',
+    minOrder: '$300 MOQ',
+    leadTime: '14–21 days',
+  },
+  {
+    name: 'OmegaFlex Tekstil',
+    country: '🇹🇷 Turkey',
     industry: 'Textiles & Apparel',
-    country: 'Turkey',
-    flag: '🇹🇷',
-    products: '12,000+ SKUs',
-    badge: 'Verified',
-    description: 'Sustainable fabric solutions with digital swatches and compliance documentation.',
+    skus: '12,000 SKUs',
+    badge: 'Verified Supplier',
+    rating: 4.8,
+    reviews: 567,
+    desc: 'Sustainable fabric solutions with digital swatches and full compliance documentation.',
+    minOrder: '$250 MOQ',
+    leadTime: '7–15 days',
+  },
+  {
+    name: 'Agrolink Exports',
+    country: '🇧🇷 Brazil',
+    industry: 'Food & Beverages',
+    skus: '890 SKUs',
+    badge: 'Organic Certified',
+    rating: 4.7,
+    reviews: 134,
+    desc: 'Certified organic food commodities, tropical fruits, and agricultural products worldwide.',
+    minOrder: '$400 MOQ',
+    leadTime: '15–30 days',
+  },
+  {
+    name: 'Luminary Tools Inc.',
+    country: '🇺🇸 United States',
+    industry: 'Hardware & Tools',
+    skus: '4,200 SKUs',
+    badge: 'Verified Supplier',
+    rating: 4.9,
+    reviews: 720,
+    desc: 'Professional-grade power tools, hand tools, and safety equipment for industrial buyers.',
+    minOrder: '$350 MOQ',
+    leadTime: '4–8 days',
   },
 ]
 
 const stats = [
-  { value: '14,000+', label: 'Verified Suppliers' },
-  { value: '180M+', label: 'Catalogue Entries' },
-  { value: '140+', label: 'Countries' },
-  { value: '99.97%', label: 'Platform Uptime' },
+  { icon: '👥', value: '200,000+', label: 'Verified Suppliers' },
+  { icon: '📦', value: '10M+', label: 'Products Available' },
+  { icon: '🌍', value: '220+', label: 'Countries & Regions' },
+  { icon: '🔒', value: '100%', label: 'Secure Transactions' },
 ]
-
-const trustedBy = ['Siemens', 'Carrefour', 'Maersk', 'Unilever', 'DHL', 'BASF']
 
 export default function HomePage() {
   return (
-    <>
+    <div style={{ background: 'var(--bg)' }}>
       {/* Hero */}
-      <section className="relative min-h-[92vh] flex items-center grid-bg overflow-hidden">
-        {/* Radial glow */}
-        <div className="absolute inset-0 bg-radial-cyan pointer-events-none" />
-        <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] rounded-full bg-cyan-400/5 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-[400px] h-[300px] bg-cyan-400/3 blur-[100px] pointer-events-none" />
+      <section className="relative overflow-hidden" style={{ background: 'var(--navy)' }}>
+        <div className="dot-bg absolute inset-0 opacity-20" />
+        {/* Orange glow */}
+        <div className="absolute -top-40 right-0 w-[700px] h-[500px] rounded-full opacity-10"
+          style={{ background: 'radial-gradient(circle, #FF6A00 0%, transparent 70%)' }} />
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-24 w-full">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 glass-card rounded-full px-4 py-2 mb-8 animate-fade-up">
-              <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-xs font-display font-semibold text-cyan-400 uppercase tracking-widest">
-                Now in Public Beta
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-20 grid md:grid-cols-2 gap-12 items-center">
+          {/* Left */}
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 animate-fade-up"
+              style={{ background: 'rgba(255,106,0,0.15)', border: '1px solid rgba(255,106,0,0.3)' }}>
+              <span className="text-xs font-display font-bold uppercase tracking-widest" style={{ color: 'var(--orange)' }}>
+                Source Smart. Trade Global.
               </span>
             </div>
-
-            <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 animate-fade-up animate-delay-100">
-              The Digital Catalogue<br />
-              <span className="text-gradient">Platform for B2B</span>
+            <h1 className="font-display text-4xl md:text-5xl font-extrabold text-white leading-tight mb-6 animate-fade-up delay-100">
+              Your Trusted B2B<br />
+              <span style={{ color: 'var(--orange)' }}>Sourcing Partner</span>
             </h1>
-
-            <p className="font-body text-xl text-slate-400 leading-relaxed mb-12 max-w-2xl animate-fade-up animate-delay-200">
-              Connect your company's technical catalogue to buyers in 140+ countries. 
-              Real-time inventory, CAD files, compliance docs — all in one secure platform.
+            <p className="font-body text-lg mb-8 leading-relaxed animate-fade-up delay-200" style={{ color: '#94a3b8' }}>
+              Explore thousands of quality catalogues from verified companies around the world.
+              Real-time inventory, technical docs, and instant RFQ.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-up animate-delay-300">
-              <button className="btn-primary flex items-center justify-center gap-2">
-                Start for Free
-                <ArrowRight size={16} />
+            <div className="flex flex-wrap gap-4 mb-10 animate-fade-up delay-300">
+              <button className="btn-primary px-7 py-3.5 flex items-center gap-2 text-base">
+                <Send size={16} />
+                Send Inquiry
               </button>
-              <Link to="/solutions" className="btn-ghost flex items-center justify-center gap-2">
-                View Solutions
-                <ChevronRight size={16} />
-              </Link>
+              <button className="btn-outline px-7 py-3.5 text-base" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.2)' }}>
+                ▷ How It Works
+              </button>
             </div>
-
-            {/* Trust signals */}
-            <div className="flex flex-wrap items-center gap-6 animate-fade-up animate-delay-400">
-              {[
-                'No credit card required',
-                'SOC 2 Type II certified',
-                '14-day free trial',
-              ].map((t) => (
+            <div className="flex flex-wrap gap-6 animate-fade-up delay-400">
+              {['Verified Suppliers', 'Secure Trading', 'Global Shipping'].map(t => (
                 <div key={t} className="flex items-center gap-2">
-                  <CheckCircle size={14} className="text-cyan-400" />
-                  <span className="text-sm text-slate-400 font-body">{t}</span>
+                  <CheckCircle size={15} style={{ color: 'var(--orange)' }} />
+                  <span className="text-sm font-body" style={{ color: '#94a3b8' }}>{t}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right — decorative visual */}
+          <div className="hidden md:flex items-center justify-center relative animate-fade-up delay-200">
+            <div className="w-80 h-80 rounded-full opacity-20 absolute"
+              style={{ background: 'radial-gradient(circle, rgba(255,106,0,0.4), transparent 70%)' }} />
+            <div className="relative grid grid-cols-2 gap-4 z-10">
+              {[
+                { icon: '🏭', label: 'Manufacturing', num: '14K+' },
+                { icon: '⚡', label: 'Electronics', num: '8.2K+' },
+                { icon: '🧪', label: 'Chemicals', num: '3.8K+' },
+                { icon: '📦', label: 'Packaging', num: '5.6K+' },
+              ].map(item => (
+                <div key={item.label} className="card p-5 text-center" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', transform: 'none' }}>
+                  <div className="text-3xl mb-2">{item.icon}</div>
+                  <div className="font-display font-bold text-white text-sm">{item.num}</div>
+                  <div className="font-body text-xs mt-1" style={{ color: '#94a3b8' }}>{item.label}</div>
                 </div>
               ))}
             </div>
@@ -124,166 +188,153 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trusted by */}
-      <section className="border-y border-white/5 py-10 bg-dark-800/40">
+      {/* Stats bar */}
+      <div className="bg-white border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <p className="text-center text-xs font-display font-semibold text-slate-600 uppercase tracking-widest mb-8">
-            Trusted by global enterprises
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-10 opacity-40">
-            {trustedBy.map((company) => (
-              <span key={company} className="text-lg font-display font-bold text-slate-300 tracking-tight">
-                {company}
-              </span>
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x" style={{ borderColor: 'var(--border)' }}>
+            {stats.map(s => (
+              <div key={s.label} className="py-6 px-8 text-center">
+                <div className="text-2xl mb-1">{s.icon}</div>
+                <div className="font-display font-extrabold text-2xl" style={{ color: 'var(--navy)' }}>{s.value}</div>
+                <div className="text-xs font-body mt-1" style={{ color: 'var(--muted)' }}>{s.label}</div>
+              </div>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Stats */}
-      <section className="py-20 max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center group">
-              <div className="font-display text-4xl md:text-5xl font-bold text-gradient mb-2 group-hover:scale-105 transition-transform">
-                {stat.value}
+      {/* Categories + Featured Companies */}
+      <section className="py-14">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-[220px_1fr] gap-8">
+          {/* Sidebar Categories */}
+          <aside>
+            <div className="card p-0 overflow-hidden sticky top-24">
+              <div className="px-4 py-3 border-b font-display font-bold text-sm" style={{ borderColor: 'var(--border)', color: 'var(--navy)' }}>
+                Categories
               </div>
-              <div className="text-sm text-slate-500 font-body uppercase tracking-widest">
-                {stat.label}
+              <ul>
+                {categories.map((cat, i) => (
+                  <li key={cat.label}>
+                    <a href="#" className="flex items-center justify-between px-4 py-2.5 hover:bg-orange-50 transition-colors group"
+                      style={{ borderBottom: i < categories.length - 1 ? `1px solid var(--border)` : 'none' }}>
+                      <span className="flex items-center gap-2.5">
+                        <span className="text-base">{cat.icon}</span>
+                        <span className="text-sm font-body group-hover:text-orange-600 transition-colors" style={{ color: i === 0 ? 'var(--orange)' : 'var(--navy)' }}>
+                          {cat.label}
+                        </span>
+                      </span>
+                      <ChevronRight size={13} style={{ color: 'var(--muted)' }} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Become a Supplier */}
+              <div className="m-3 rounded-xl p-4 text-center" style={{ background: 'linear-gradient(135deg, var(--navy) 0%, #2d3748 100%)' }}>
+                <div className="text-2xl mb-2">🌐</div>
+                <div className="font-display font-bold text-white text-sm mb-1">Become a Supplier</div>
+                <p className="text-xs font-body mb-3" style={{ color: '#94a3b8' }}>Grow your business globally with us.</p>
+                <button className="btn-primary text-xs px-4 py-2 w-full">Join Now →</button>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </aside>
 
-      {/* Featured Companies */}
-      <section className="py-20 bg-dark-800/30">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-            <div>
-              <span className="section-label">Global Network</span>
-              <h2 className="section-title">Featured Suppliers</h2>
+          {/* Main content */}
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="section-title text-2xl">Featured Companies</h2>
+              <a href="#" className="flex items-center gap-1.5 text-sm font-display font-bold hover:gap-3 transition-all" style={{ color: 'var(--orange)' }}>
+                View All <ArrowRight size={14} />
+              </a>
             </div>
-            <a href="#" className="flex items-center gap-2 text-sm font-display font-semibold text-cyan-400 hover:gap-3 transition-all">
-              View All Suppliers <ArrowRight size={15} />
-            </a>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {companies.map((company) => (
-              <div
-                key={company.name}
-                className="glass-card rounded-2xl p-6 group hover:border-cyan-400/20 hover:cyan-glow-sm transition-all duration-300 cursor-pointer"
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-dark-700 border border-white/10 flex items-center justify-center text-2xl">
-                      {company.flag}
+            <div className="grid sm:grid-cols-2 xl:grid-cols-2 gap-5">
+              {companies.map(company => (
+                <div key={company.name} className="card p-5 group cursor-pointer">
+                  {/* Header */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
+                        style={{ background: 'var(--orange-light)', border: '1px solid var(--orange-mid)' }}>
+                        🏢
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold text-sm leading-tight" style={{ color: 'var(--navy)' }}>
+                          {company.name}
+                        </h3>
+                        <p className="text-xs font-body mt-0.5" style={{ color: 'var(--muted)' }}>{company.country}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-white text-base leading-tight">
-                        {company.name}
-                      </h3>
-                      <p className="text-xs text-slate-500 font-body mt-0.5">{company.country}</p>
-                    </div>
+                    <span className="tag-orange text-xs">{company.badge}</span>
                   </div>
-                  <span className="text-xs font-display font-semibold px-2.5 py-1 rounded-full bg-cyan-400/10 text-cyan-400 border border-cyan-400/20 whitespace-nowrap">
-                    {company.badge}
+
+                  {/* Industry tag */}
+                  <span className="inline-block text-xs font-body px-2.5 py-1 rounded-full mb-3"
+                    style={{ background: '#f1f5f9', color: 'var(--navy-light)' }}>
+                    {company.industry}
                   </span>
-                </div>
 
-                {/* Industry tag */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/5 mb-4">
-                  <span className="text-xs text-slate-400 font-body">{company.industry}</span>
-                </div>
+                  <p className="text-xs font-body leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
+                    {company.desc}
+                  </p>
 
-                {/* Description */}
-                <p className="text-sm text-slate-400 font-body leading-relaxed mb-5">
-                  {company.description}
-                </p>
+                  {/* Meta */}
+                  <div className="flex items-center gap-4 mb-4 text-xs font-body" style={{ color: 'var(--muted)' }}>
+                    <span className="flex items-center gap-1">
+                      <Package size={12} style={{ color: 'var(--orange)' }} />
+                      {company.skus}
+                    </span>
+                    <span>📦 {company.minOrder}</span>
+                    <span>⏱ {company.leadTime}</span>
+                  </div>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                  <span className="text-xs text-cyan-400 font-display font-semibold">
-                    {company.products}
-                  </span>
-                  <button className="flex items-center gap-1.5 text-xs font-display font-semibold text-slate-500 hover:text-white transition-colors group-hover:text-cyan-400">
-                    View Catalogue <ChevronRight size={13} />
+                  {/* Rating */}
+                  <div className="flex items-center gap-1.5 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={12} fill={i < Math.floor(company.rating) ? 'var(--orange)' : 'none'}
+                        style={{ color: 'var(--orange)' }} />
+                    ))}
+                    <span className="text-xs font-display font-bold" style={{ color: 'var(--navy)' }}>{company.rating}</span>
+                    <span className="text-xs font-body" style={{ color: 'var(--muted)' }}>({company.reviews} reviews)</span>
+                  </div>
+
+                  {/* Action */}
+                  <button className="btn-primary w-full text-xs py-2.5 flex items-center justify-center gap-2">
+                    <Send size={13} />
+                    Inquiry Now
                   </button>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Allcatalogue */}
-      <section className="py-24 max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16">
-          <span className="section-label">Why Choose Us</span>
-          <h2 className="section-title mb-4">Built for enterprise-scale B2B</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Not another product listing site. A complete digital infrastructure for how companies share technical data.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <Globe className="text-cyan-400" size={24} />,
-              title: 'Global Distribution Network',
-              desc: 'Your catalogue reaches buyers in 140+ countries with edge-cached delivery under 50ms anywhere on the planet.',
-            },
-            {
-              icon: <Shield className="text-cyan-400" size={24} />,
-              title: 'Enterprise-Grade Security',
-              desc: 'SOC 2 Type II, GDPR compliant. Cloudflare Turnstile, malware scanning on every uploaded file.',
-            },
-            {
-              icon: <Zap className="text-cyan-400" size={24} />,
-              title: 'Real-Time Sync',
-              desc: 'Push inventory, pricing, and spec updates instantly across all buyer-facing channels via our API.',
-            },
-          ].map((item) => (
-            <div key={item.title} className="glass-card rounded-2xl p-8 hover:border-cyan-400/20 transition-all duration-300 group">
-              <div className="w-12 h-12 rounded-xl bg-cyan-400/10 flex items-center justify-center mb-6 group-hover:bg-cyan-400/15 transition-colors">
-                {item.icon}
-              </div>
-              <h3 className="font-display text-xl font-bold text-white mb-3">{item.title}</h3>
-              <p className="text-slate-400 font-body text-sm leading-relaxed">{item.desc}</p>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="glass-card rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-cyan-400/5 blur-[80px] pointer-events-none" />
-            <div className="relative">
+      <section className="py-16 px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto rounded-2xl overflow-hidden relative" style={{ background: 'var(--navy)' }}>
+          <div className="absolute inset-0 dot-bg opacity-20" />
+          <div className="absolute -right-20 top-0 bottom-0 w-96 opacity-15"
+            style={{ background: 'radial-gradient(circle, #FF6A00, transparent 70%)' }} />
+          <div className="relative py-16 px-8 md:px-16 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
               <span className="section-label">Ready to Scale?</span>
-              <h2 className="section-title mb-6 max-w-2xl mx-auto">
-                Launch your global catalogue in minutes
+              <h2 className="font-display text-3xl font-extrabold text-white mb-3">
+                Launch your global catalogue today
               </h2>
-              <p className="section-subtitle max-w-xl mx-auto mb-10">
-                Join 14,000+ suppliers already using Allcatalogue to reach buyers worldwide.
+              <p className="font-body text-base" style={{ color: '#94a3b8' }}>
+                Join 200,000+ verified suppliers. No setup fees.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button className="btn-primary flex items-center justify-center gap-2">
-                  Start Free Trial
-                  <ArrowRight size={16} />
-                </button>
-                <Link to="/pricing" className="btn-ghost">
-                  View Pricing
-                </Link>
-              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+              <button className="btn-primary px-8 py-4 text-base">Get Started Free</button>
+              <Link to="/pricing" className="btn-outline px-8 py-4 text-base" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.2)' }}>
+                View Pricing
+              </Link>
             </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
